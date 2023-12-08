@@ -32,11 +32,11 @@ void inverse(uint8_t *num) {
 }
 
 void sw_var(uint8_t *num) {
-  bit_switch(num, 7, 5);
-  bit_switch(num, 5, 2);
-  bit_switch(num, 4, 3);
-  bit_switch(num, 3, 1);
   bit_switch(num, 1, 0);
+  bit_switch(num, 3, 1);
+  bit_switch(num, 4, 3);
+  bit_switch(num, 5, 2);
+  bit_switch(num, 7, 5);
 }
 
 int main() {
