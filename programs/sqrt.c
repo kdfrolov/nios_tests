@@ -1,24 +1,22 @@
-#include <stdint.h>
+#define SW_ADDR  (volatile char*) 0x0000
+#define LED_ADDR (volatile char*) 0x0000
+#define HEX_ADDR (volatile char*) 0x0000
 
-#define SW_ADDR  (volatile uint8_t*) 0x0000
-#define LED_ADDR (volatile uint8_t*) 0x0000
-#define HEX_ADDR (volatile uint8_t*) 0x0000
-
-void write_out(uint8_t val) {
-  volatile uint8_t *sw = SW_ADDR;
-  volatile uint8_t *led = LED_ADDR;
+void write_out(char val) {
+  volatile char *sw = SW_ADDR;
+  volatile char *led = LED_ADDR;
 
   *sw = val;
   *led = val;
 }
 
-uint8_t read_from() {
-  volatile uint8_t *led = LED_ADDR;
+char read_from() {
+  volatile char *led = LED_ADDR;
   return *led;
 }
 
-uint32_t isqrt(uint32_t x) {
-    uint32_t m, y, b;
+int isqrt(int x) {
+    int m, y, b;
     m = 0x40000000;
     y = 0;
     while (m != 0) {
@@ -34,8 +32,8 @@ uint32_t isqrt(uint32_t x) {
 }
 
 int main() {
-  uint8_t val = read_from();
+  char val = read_from();
 
-  uint8_t res = (uint8_t)isqrt(val);
+  char res = (char)isqrt(val);
   write_out(res);
 }
