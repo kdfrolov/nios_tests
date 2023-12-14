@@ -15,27 +15,26 @@ void read_from(unsigned char *val) {
   *val = *sw;
 }
 
-int isqrt(int x) {
-    int m, y, b;
-    m = 0x40000000;
-    y = 0;
-    while (m != 0) {
-        b = y |  m;
-        y >>= 1;
-        if (x >= b) {
-            x -= b;
-            y |= m;
-        }
-        m >>= 2;
-    }
-    return y;
+void swapBits(unsigned char *n, unsigned char p1, unsigned char p2) {
+  if (((*n & (1 << p1)) >> p1) ^ ((*n & (1 << p2)) >> p2)) {
+    *n ^= 1 << p1;
+    *n ^= 1 << p2;
+  }
+}
+
+void swap_var(unsigned char *num) {
+  swapBits(num, 1, 0);
+  swapBits(num, 3, 1);
+  swapBits(num, 4, 3);
+  swapBits(num, 5, 2);
+  swapBits(num, 7, 5);
 }
 
 int main() {
   unsigned char val;
   while (1) {
     read_from(&val);
-    val = (unsigned char)isqrt(val);
+    swap_var(&val);
     write_out(&val);
   }
 }

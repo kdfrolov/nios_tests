@@ -1,20 +1,20 @@
-#define SW_ADDR  (volatile char*) 0x0000
-#define LED_ADDR (volatile char*) 0x0000
-#define HEX_ADDR (volatile char*) 0x0000
+#define SW_ADDR  (volatile unsigned char*) 0x0000
+#define LED_ADDR (volatile unsigned char*) 0x0000
+#define HEX_ADDR (volatile unsigned char*) 0x0000
 
-void write_out(char val) {
-  volatile char *sw = SW_ADDR;
-  volatile char *led = LED_ADDR;
+void write_out(unsigned char *val) {
+  volatile unsigned char *hex = HEX_ADDR;
+  volatile unsigned char *led = LED_ADDR;
 
-  *sw = val;
-  *led = val;
+  *hex = *val;
+  *led = *val;
 }
 
 int main() {
-  char cnt = 0;
+  unsigned char cnt = 0;
 
   while (1) {
     cnt++;
-    write_out(cnt);
+    write_out(&cnt);
   }
 }
